@@ -12,6 +12,16 @@ void setup() {
   Serial.println("======== HTU21D =========");
   Serial.println("======== Measure =========");
 
+  // WeatherShield MUX control pins
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+
+  // MUX select HTU21D
+  digitalWrite(9, LOW);
+  digitalWrite(10, LOW);
+  digitalWrite(11, LOW);
+
   m_htu21d.begin();
   status = m_htu21d.get_battery_status(&battery_status);
   Serial.println(battery_status == htu21_battery_ok ? "Battery OK"
@@ -35,7 +45,7 @@ void loop() {
 
     Serial.print("---Temperature = ");
     Serial.print(temperature, 1);
-    Serial.print((char)176);
+    // Serial.print((char)176);
     Serial.println("C");
 
     Serial.print("---Humidity = ");
